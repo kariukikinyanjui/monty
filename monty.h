@@ -18,10 +18,25 @@
  */
 typedef struct stack_s
 {
-        int n;
-        struct stack_s *prev;
-        struct stack_s *next;
+	int n;
+	struct stack_s *prev;
+	struct stack_s *next;
 } stack_t;
+/**
+ * struct custom_data_s - variables - custom_arg, custom_file, custom_content
+ * @custom_arg: value
+ * @custom_file: pointer to monty file
+ * @custom_content: line content
+ * @custom_flag: flag change stack / queue
+ */
+typedef struct custom_data_s
+{
+	char *custom_arg;
+	FILE *custom_file;
+	char *custom_content;
+	int custom_flag;
+} custom_data_t;
+extern custom_data_t custom_data;
 /**
  * struct instruction_s - opcode and its function
  * @opcode: the opcode
@@ -32,9 +47,15 @@ typedef struct stack_s
  */
 typedef struct instruction_s
 {
-        char *opcode;
-        void (*f)(stack_t **stack, unsigned int line_number);
+	char *opcode;
+	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
-void _push(stack_t **stack, unsigned int line_no, int value);
+void _push(stack_t **stack, unsigned int line_no);
 void _pall(stack_t **stack, unsigned int line_no);
+void _addnode(stack_t **head, int n);
+void _freestack(stack_t *head);
+void _addqueue(stack_t **head, int n);
+void _queue(stack_t **head, unsigned int line_no);
+int _exec(char *content, stack_t **stack, unsigned int line_no, FILE *file);
+ssize_t getline(char **lineptr, size_t *n, FILE *stream);
 #endif
