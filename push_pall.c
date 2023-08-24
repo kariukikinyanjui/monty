@@ -5,26 +5,29 @@
  * integer value to the stack
  * @stack: double pointer to the beginning of the stack
  * @line_no: line number
- * @value: integer value
  */
-void _push(stack_t **stack, unsigned int line_no, int value)
+void _push(stack_t **stack, unsigned int line_no)
 {
-	stack_t *new node = malloc(sizeof(stack_t));
+	int n;
 
-	if (!new_node)
+	if (custom_data.custom_arg == 0)
 	{
-		fprintf(stderr, "Error: malloc failed\n");
+		fprintf(stderr, "L%d: usage: push integer\n", line_no);
+		fclose(custom_data.custom_file);
+		free(custom_data.custom_content);
+		_freestack(*stack);
 		exit(EXIT_FAILURE);
 	}
-	new_node->n = value;
-	new_node->prev = NULL;
-	new_node->next = *stack;
+	n = atoi(custom_data.custom_arg);
 
-	if (*stack)
+	if (custom_data.custom_flag == 0)
 	{
-		(*stack)->prev = new_node;
+		_addnode(stack, n);
 	}
-	*stack = new_node;
+	else
+	{
+		_addqueue(stack, n);
+	}
 }
 /**
  * _pall - function prints all the elements in the stack
@@ -34,6 +37,10 @@ void _push(stack_t **stack, unsigned int line_no, int value)
 void _pall(stack_t **stack, unsigned int line_no)
 {
 	stack_t *current = *stack;
+	(void)line_no;
+
+	if (current == NULL)
+		return;
 
 	while (current)
 	{
