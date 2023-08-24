@@ -12,6 +12,7 @@ int _exec(char *content, stack_t **stack, unsigned int line_no, FILE *file)
 {
 	instruction_t opst[] = {
 		{"push", _push}, {"pall", _pall},
+		{"pint", _pint},
 		{"queue", _queue},
 		{NULL, NULL}
 	};
