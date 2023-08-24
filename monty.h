@@ -59,4 +59,5 @@ void _queue(stack_t **head, unsigned int line_no);
 int _exec(char *content, stack_t **stack, unsigned int line_no, FILE *file);
 ssize_t getline(char **lineptr, size_t *n, FILE *stream);
 void _pint(stack_t **head, unsigned int line_no);
+void _pop(stack_t **head, unsigned int line_no);
 #endif
